@@ -6,4 +6,4 @@ before_install:
   - docker build -t suparera/06frontend -f Dockerfile.dev .
 
 script:
-  - docker run suparara/06frontend npm run test -- --coverage
+  - docker run suparera/06frontend npm run test -- --coverage
