@@ -9,3 +9,34 @@ docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app suparera/06reactapp
     -p  : specific port mapping hostPort:containerPort
     -v /app/node_modules    : bookmark volume , tell not use this path from mapping volume, use it from containerPort
     -v $(pwd):/app  : mapping volume, for development, change in src code in host can be appear in container, 
+
+
+#docker-compose way
+
+no change , default build
+
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+2. docker-compose specific dockerfile in build:
+
+run test
+docker run -it suparera/06reactapp npm run test
+
+#run test with live change
+docker run -it -v $(pwd):/app suparera/06reactapp npm run test
+
+#run test attach to running docker-compose 
+1. get container id
+    docker ps
+2. run test attach to that container
+    docker exec -it 1232313132 npm run test
+
+#06-18 test as 2nd service in docker-compose
