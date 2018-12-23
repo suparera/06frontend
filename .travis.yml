@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t suparera/06frontend -f Dockerfile.dev .
+
+script:
+  - docker run suparara/06frontend npm run test -- --coverage
