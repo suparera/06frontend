@@ -1,0 +1,11 @@
+# docker build command
+docker build -f Dockerfile.dev -t suparera/06reactapp .
+    -f  : specific dockerfile for dev env
+    -t  : specific tag , so no need to copy imageId
+    .   : build context
+
+# docker run command
+docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app suparera/06reactapp
+    -p  : specific port mapping hostPort:containerPort
+    -v /app/node_modules    : bookmark volume , tell not use this path from mapping volume, use it from containerPort
+    -v $(pwd):/app  : mapping volume, for development, change in src code in host can be appear in container, 
