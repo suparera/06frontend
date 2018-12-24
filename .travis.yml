@@ -5,5 +5,21 @@ services:
 before_install:
   - docker build -t suparera/06frontend -f Dockerfile.dev .
 
+# script that run npm test , --converage add for completely stop process
 script:
   - docker run suparera/06frontend npm run test -- --coverage
+
+# deploy to elasticbeanstalk 
+# url 06frontend-env.rrmqsz8j3x.ap-southeast-1.elasticbeanstalk.com
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-southeast-1"
+  app: "06frontend"
+  env: "06frontend-env" #the actually run is env
+  bucket_name: "elasticbeanstalk-ap-southeast-1-303791465230"
+  bucket_path: "06frontend" #folder in bucket
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
